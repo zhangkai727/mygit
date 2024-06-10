@@ -8,7 +8,7 @@ app = Flask(__name__)
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 
 # 加载模型和tokenizer
-model_name = "gpt2"  # 模型名称
+model_name = "gpt2"  # 模型的名称
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
