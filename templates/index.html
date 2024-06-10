@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with Model</title>
+</head>
+<body>
+    <h1>Simple chat model</h1>
+    <form id="chat-form">
+        <label for="prompt">Enter your message:</label><br>
+        <input type="text" id="prompt" name="prompt"><br><br>
+        <input type="submit" value="Send">
+    </form>
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('chat-form').onsubmit = async function(event) {
+            event.preventDefault();
+            const prompt = document.getElementById('prompt').value;
+            const responseDiv = document.getElementById('response');
+            responseDiv.innerHTML = 'Loading...';
+
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt: prompt }),
+            });
+            const data = await response.json();
+            responseDiv.innerHTML = data.choices[0].text;
+        };
+    </script>
+</body>
+</html>
+
